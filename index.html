@@ -17,83 +17,96 @@
         .btn:hover { background: #1d4ed8; }
         .input-group { margin-bottom: 1rem; text-align: right; }
         .input-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--primary); }
-        .input-group input, .input-group select { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; }
-        .chat-box { border: 1px solid #e2e8f0; border-radius: 8px; height: 320px; overflow-y: auto; padding: 1rem; background: #f1f5f9; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .input-group input { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; }
+        .chat-box { border: 1px solid #e2e8f0; border-radius: 8px; height: 300px; overflow-y: auto; padding: 1rem; background: #f1f5f9; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
         .message { padding: 0.75rem 1rem; border-radius: 8px; max-width: 80%; word-break: break-word; line-height: 1.4; }
-        .message.student-msg { background: #dbeafe; align-self: flex-start; border-right: 4px solid var(--secondary); }
-        .message.teacher-msg { background: #dcfce7; align-self: flex-end; border-right: 4px solid var(--accent); }
-        .chat-input-area { display: flex; gap: 0.5rem; }
-        .chat-input-area input { flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+        .message.sent { background: #dbeafe; align-self: flex-start; border-right: 4px solid var(--secondary); }
+        .message.received { background: #dcfce7; align-self: flex-end; border-right: 4px solid var(--accent); }
         footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 1rem; font-size: 0.9rem; }
         .role-selector { display: flex; gap: 1rem; margin-bottom: 1rem; }
         .role-btn { flex: 1; padding: 1rem; border: 2px solid #cbd5e1; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; text-align: center; transition: all 0.2s; }
         .role-btn.active { border-color: var(--secondary); color: var(--secondary); background: #eff6ff; }
         .section-title { font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
-        .student-item { background: #f8fafc; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .teacher-item { background: #f8fafc; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .school-info { background: #f1f5f9; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-right: 4px solid var(--secondary); }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">مدرسة الهداية الخليفية الثانوية للبنين</div>
-        <div class="counter-badge">الزوار المسجلين: <span id="visitorCount">1</span></div>
+        <div class="counter-badge">الزوار المسجلين: <span id="visitorCount">0</span></div>
     </header>
 
     <div class="main-container">
         <!-- شاشة تسجيل الدخول -->
         <div id="loginScreen">
-            <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">تسجيل الدخول لبوابة الهداية</h2>
+            <div class="school-info">
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">بوابة التواصل الأكاديمي</h3>
+                <p style="color: #64748b; font-size: 0.95rem;">الطلاب: يجب استخدام البريد الوزاري (ينتهي بـ moe.bh). المعلمون: استخدام الحساب الرسمي المعتمد.</p>
+            </div>
+            
             <div class="role-selector">
                 <div class="role-btn active" id="studentRoleBtn" onclick="setRole('student')">طالب</div>
                 <div class="role-btn" id="teacherRoleBtn" onclick="setRole('teacher')">معلم</div>
             </div>
             
             <div class="input-group">
-                <label id="labelEmail">البريد الإلكتروني الوزاري أو الحساب</label>
-                <input type="email" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني">
+                <label id="labelEmail">البريد الإلكتروني</label>
+                <input type="email" id="userEmailInput" placeholder="student@moe.bh">
             </div>
             <div class="input-group">
                 <label>اسم المستخدم / اللقب</label>
                 <input type="text" id="userNameInput" placeholder="أدخل اسمك الكريم">
             </div>
-            <button class="btn" onclick="handleLogin()">دخول للمنصة</button>
+            <button class="btn" onclick="handleLogin()">تسجيل الدخول</button>
         </div>
 
-        <!-- لوحة تحكم الطالب -->
+        <!-- لوحة تحكم الطالب (اختيار المعلم والمراسلة السرية) -->
         <div id="studentDashboard" class="hidden">
-            <h2 class="section-title">منصة الطالب - مراسلة المعلم الخاصة</h2>
-            <p style="margin-bottom: 1rem; color: #64748b;">تواصل مع الأستاذ (teacher12@gmail.com) بسرية تامة واستفسر عن دروسك:</p>
-            <div class="chat-box" id="studentChatBox">
-                <div class="message teacher-msg"><b>الأستاذ:</b> أهلاً بك يا بطل في بوابة مدرسة الهداية الخليفية. اكتب سؤالك هنا وسأقوم بالرد عليك.</div>
+            <div class="school-info">
+                <h2 id="welcomeStudentTitle" style="color: var(--primary); margin-bottom: 0.5rem;"></h2>
+                <p style="color: #64748b;">اختر معلماً من القائمة أدناه لبدء محادثة خاصة وسرية معه:</p>
             </div>
-            <div class="chat-input-area">
-                <input type="text" id="studentMessageInput" placeholder="اكتب رسالتك للأستاذ...">
-                <button class="btn" style="width: auto; margin-top: 0;" onclick="sendStudentMessage()">إرسال</button>
+
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">المعلمون المتواجدون حالياً:</h3>
+                    <div id="onlineTeachersList" style="max-height: 300px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.5rem; background: #f8fafc;">
+                        <!-- يتم تعبئتها بالمعلمين المسجلين -->
+                    </div>
+                </div>
+                <div>
+                    <h3 id="activeChatTitle" style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">المراسلة الخاصة</h3>
+                    <div class="chat-box" id="studentChatBox" style="height: 240px;">
+                        <div class="message received"><b>النظام:</b> اختر معلماً من القائمة للبدء في مراسلته.</div>
+                    </div>
+                    <div class="chat-input-area" style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="studentMessageInput" placeholder="اكتب رسالتك..." style="flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <button class="btn" style="width: auto; margin-top: 0;" onclick="sendStudentMessage()">إرسال</button>
+                    </div>
+                </div>
             </div>
+
             <button class="btn" style="background: #ef4444; margin-top: 2rem;" onclick="logout()">تسجيل خروج</button>
         </div>
 
         <!-- لوحة تحكم المعلم -->
         <div id="teacherDashboard" class="hidden">
-            <h2 class="section-title">لوحة تحكم المعلم (الحساب الرسمي)</h2>
-            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">الطلاب المسجلين في التطبيق:</h3>
-                    <div id="registeredStudentsList" style="max-height: 320px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.5rem; background: #f8fafc;">
-                        <!-- يتم تعبئتها تلقائياً -->
-                    </div>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">مراسلة الطلاب (سرية خاصة):</h3>
-                    <div class="chat-box" id="teacherChatBox" style="height: 260px;">
-                        <div class="message student-msg"><b>النظام:</b> اختر طالباً من القائمة وابدأ الرد على استفساراته.</div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="teacherMessageInput" placeholder="اكتب ردك للطالب...">
-                        <button class="btn" style="width: auto; margin-top: 0;" onclick="sendTeacherMessage()">إرسال</button>
-                    </div>
-                </div>
+            <div class="school-info">
+                <h2 id="welcomeTeacherTitle" style="color: var(--primary); margin-bottom: 0.5rem;"></h2>
+                <p style="color: #64748b;">أنت مسجل الآن كمعلم رسمي في النظام. يمكنك استقبال رسائل الطلاب والرد عليها.</p>
             </div>
+            
+            <h3 class="section-title">صندوق الوارد (رسائل الطلاب)</h3>
+            <div class="chat-box" id="teacherChatBox">
+                <div class="message received"><b>النظام:</b> لا توجد رسائل حالياً. الرسائل سرية وخاصة بكل طالب.</div>
+            </div>
+            <div class="chat-input-area" style="display: flex; gap: 0.5rem;">
+                <input type="text" id="teacherMessageInput" placeholder="اكتب ردك للطالب..." style="flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <button class="btn" style="width: auto; margin-top: 0;" onclick="sendTeacherMessage()">إرسال الرد</button>
+            </div>
+
             <button class="btn" style="background: #ef4444; margin-top: 2rem;" onclick="logout()">تسجيل خروج</button>
         </div>
     </div>
@@ -104,159 +117,197 @@
 
     <script>
         let currentRole = 'student';
-        let currentUser = null;
 
         function setRole(role) {
             currentRole = role;
             const studentBtn = document.getElementById('studentRoleBtn');
             const teacherBtn = document.getElementById('teacherRoleBtn');
             const emailInput = document.getElementById('userEmailInput');
+            const labelEmail = document.getElementById('labelEmail');
 
             if (role === 'student') {
                 studentBtn.classList.add('active');
                 teacherBtn.classList.remove('active');
                 emailInput.value = '';
                 emailInput.disabled = false;
-                emailInput.placeholder = 'أدخل بريدك الوزاري (student@moe.bh)';
+                emailInput.placeholder = 'student@moe.bh';
+                labelEmail.innerText = 'البريد الوزاري (يجب أن ينتهي بـ moe.bh)';
             } else {
                 teacherBtn.classList.add('active');
                 studentBtn.classList.remove('active');
-                emailInput.value = 'teacher12@gmail.com';
-                emailInput.disabled = true;
+                emailInput.value = '';
+                emailInput.disabled = false;
+                emailInput.placeholder = 'teacher12@gmail.com';
+                labelEmail.innerText = 'حساب المعلم المعتمد';
             }
         }
 
         function handleLogin() {
             const name = document.getElementById('userNameInput').value.trim();
-            const email = document.getElementById('userEmailInput').value.trim();
+            const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
 
             if (!name) {
                 alert('الرجاء إدخال اسمك الكريم');
                 return;
             }
 
-            if (currentRole === 'teacher' && email !== 'teacher12@gmail.com') {
-                alert('حساب المعلم المعتمد هو: teacher12@gmail.com');
-                return;
-            }
-
-            currentUser = { name, email, role: currentRole };
-
-            // حفظ الطالب في قائمة المسجلين وزيادة العداد
-            let students = JSON.parse(localStorage.getItem('hedayah_students') || '[]');
-            if (currentRole === 'student' && !students.some(s => s.email === email)) {
-                students.push({ name, email });
-                localStorage.setItem('hedayah_students', JSON.stringify(students));
-                
-                let count = parseInt(localStorage.getItem('visitorCount') || '14') + 1;
-                localStorage.setItem('visitorCount', count);
-            }
-
-            document.getElementById('loginScreen').classList.add('hidden');
-
             if (currentRole === 'student') {
+                // التحقق من بريد الوزارة في البحرين
+                if (!email.endsWith('@moe.bh')) {
+                    alert('خطأ: حساب الطالب يجب أن ينتهي بـ @moe.bh (البريد الوزاري المعتمد في البحرين)');
+                    return;
+                }
+
+                // تسجيل الطالب وزيادة العداد الحقيقي للمسجلين الفريدين
+                let users = JSON.parse(localStorage.getItem('hedayah_users') || '[]');
+                if (!users.some(u => u.email === email)) {
+                    users.push({ name, email, role: 'student' });
+                    localStorage.setItem('hedayah_users', JSON.stringify(users));
+                }
+
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('welcomeStudentTitle').innerText = `مرحباً بك يا بطل: ${name}`;
                 document.getElementById('studentDashboard').classList.remove('hidden');
-                loadStudentMessages();
+                window.currentUser = { name, email, role: 'student' };
+                loadOnlineTeachers();
+
             } else {
+                // التحقق من حساب المعلم الثابت والمحدد بدقة
+                if (email !== 'teacher12@gmail.com') {
+                    alert('خطأ: حساب المعلم غير صحيح. يجب استخدام الحساب المعتمد: teacher12@gmail.com');
+                    return;
+                }
+
+                // تسجيل المعلم في قائمة المعلمين المتواجدين
+                let teachers = JSON.parse(localStorage.getItem('hedayah_teachers') || '[]');
+                if (!teachers.some(t => t.email === email)) {
+                    teachers.push({ name, email });
+                    localStorage.setItem('hedayah_teachers', JSON.stringify(teachers));
+                }
+
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('welcomeTeacherTitle').innerText = `أهلاً بك يا أستاذ: ${name}`;
                 document.getElementById('teacherDashboard').classList.remove('hidden');
-                loadTeacherData();
+                window.currentUser = { name, email, role: 'teacher' };
+                loadTeacherMessages();
             }
+
             updateVisitorCounter();
         }
 
-        function sendStudentMessage() {
-            const input = document.getElementById('studentMessageInput');
-            const text = input.value.trim();
-            if (!text) return;
+        let selectedTeacherEmail = null;
+        let selectedTeacherName = null;
 
-            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
-            messages.push({ senderEmail: currentUser.email, senderName: currentUser.name, text: text, type: 'student', time: new Date().toLocaleTimeString() });
-            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
+        function loadOnlineTeachers() {
+            let teachers = JSON.parse(localStorage.getItem('hedayah_teachers') || '[]');
+            const listDiv = document.getElementById('onlineTeachersList');
+            
+            if (teachers.length === 0) {
+                listDiv.innerHTML = '<p style="font-size:0.85rem; color:#64748b; text-align:center; padding:1rem;">لا يوجد معلمون مسجلون دخولهم حالياً.</p>';
+                return;
+            }
 
-            input.value = '';
-            loadStudentMessages();
+            let html = '';
+            teachers.forEach(t => {
+                html += `<div class="teacher-item"><span><b>${t.name}</b><br><small style="color:#64748b">متواجد</small></span><button class="btn" style="width:auto; padding:0.3rem 0.6rem; font-size:0.8rem; margin:0;" onclick="selectTeacher('${t.email}', '${t.name}')">مراسلة</button></div>`;
+            });
+            listDiv.innerHTML = html;
         }
 
-        function loadStudentMessages() {
+        function selectTeacher(email, name) {
+            selectedTeacherEmail = email;
+            selectedTeacherName = name;
+            document.getElementById('activeChatTitle').innerText = `المحادثة مع المعلم: ${name}`;
+            loadStudentChat();
+        }
+
+        function loadStudentChat() {
+            if (!selectedTeacherEmail) return;
             const chatBox = document.getElementById('studentChatBox');
             let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
-            let html = `<div class="message teacher-msg"><b>الأستاذ:</b> أهلاً بك يا بطل. تفضل بطرح سؤالك وسأجيبك.</div>`;
             
-            messages.filter(m => m.senderEmail === currentUser.email || (m.type === 'teacher' && m.targetEmail === currentUser.email)).forEach(m => {
-                if (m.type === 'student') {
-                    html += `<div class="message student-msg"><b>أنت (${m.senderName}):</b> ${m.text}</div>`;
+            let html = `<div class="message received"><b>النظام:</b> بدأت المحادثة الخاصة مع الأستاذ ${selectedTeacherName}.</div>`;
+            messages.filter(m => (m.studentEmail === window.currentUser.email && m.teacherEmail === selectedTeacherEmail)).forEach(m => {
+                if (m.sender === 'student') {
+                    html += `<div class="message sent"><b>أنت:</b> ${m.text}</div>`;
                 } else {
-                    html += `<div class="message teacher-msg"><b>الأستاذ:</b> ${m.text}</div>`;
+                    html += `<div class="message received"><b>الأستاذ:</b> ${m.text}</div>`;
                 }
             });
             chatBox.innerHTML = html;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function loadTeacherData() {
-            let students = JSON.parse(localStorage.getItem('hedayah_students') || '[]');
-            const listDiv = document.getElementById('registeredStudentsList');
-            if (students.length === 0) {
-                listDiv.innerHTML = '<p style="font-size:0.85rem; color:#64748b; text-align:center; padding:1rem;">لا توجد طلاب مسجلين حتى الآن.</p>';
+        function sendStudentMessage() {
+            if (!selectedTeacherEmail) {
+                alert('الرجاء اختيار معلم من القائمة أولاً.');
                 return;
             }
-            let html = '';
-            students.forEach((s, idx) => {
-                html += `<div class="student-item"><span><b>${s.name}</b><br><small style="color:#64748b">${s.email}</small></span><button class="btn" style="width:auto; padding:0.3rem 0.6rem; font-size:0.8rem; margin:0;" onclick="openChatWith('${s.email}', '${s.name}')">مراسلة</button></div>`;
-            });
-            listDiv.innerHTML = html;
-        }
+            const input = document.getElementById('studentMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
 
-        let activeStudentEmail = null;
-        let activeStudentName = null;
-
-        function openChatWith(email, name) {
-            activeStudentEmail = email;
-            activeStudentName = name;
-            alert(`تم فتح محادثة خاصة مع الطالب: ${name}`);
-            loadTeacherChat();
-        }
-
-        function loadTeacherChat() {
-            const chatBox = document.getElementById('teacherChatBox');
-            if (!activeStudentEmail) {
-                chatBox.innerHTML = '<div class="message student-msg"><b>النظام:</b> الرجاء اختيار طالب من القائمة الجانبية لعرض المحادثة والرد عليه.</div>';
-                return;
-            }
             let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
-            let html = `<div class="message student-msg"><b>المحادثة مع الطالب:</b> ${activeStudentName}</div>`;
+            messages.push({
+                studentEmail: window.currentUser.email,
+                studentName: window.currentUser.name,
+                teacherEmail: selectedTeacherEmail,
+                sender: 'student',
+                text: text,
+                time: new Date().toLocaleTimeString()
+            });
+            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
+            input.value = '';
+            loadStudentChat();
+        }
+
+        function loadTeacherMessages() {
+            const chatBox = document.getElementById('teacherChatBox');
+            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
             
-            messages.filter(m => m.senderEmail === activeStudentEmail || (m.type === 'teacher' && m.targetEmail === activeStudentEmail)).forEach(m => {
-                if (m.type === 'student') {
-                    html += `<div class="message student-msg"><b>${m.senderName}:</b> ${m.text}</div>`;
-                } else {
-                    html += `<div class="message teacher-msg"><b>أنت (الأستاذ):</b> ${m.text}</div>`;
-                }
+            if (messages.length === 0) {
+                chatBox.innerHTML = '<div class="message received"><b>النظام:</b> لا توجد رسائل واردة من الطلاب حتى الآن.</div>';
+                return;
+            }
+
+            let html = '';
+            messages.forEach(m => {
+                html += `<div class="message received"><b>طالب (${m.studentName}):</b> ${m.text} <br><small style="color:#64748b">${m.time}</small></div>`;
             });
             chatBox.innerHTML = html;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         function sendTeacherMessage() {
-            if (!activeStudentEmail) {
-                alert('الرجاء اختيار طالب من القائمة أولاً لتتمكن من إرسال الرد.');
-                return;
-            }
             const input = document.getElementById('teacherMessageInput');
             const text = input.value.trim();
             if (!text) return;
 
+            // المعلم يرد على آخر رسالة استقبلها
             let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
-            messages.push({ senderEmail: 'teacher12@gmail.com', targetEmail: activeStudentEmail, senderName: 'الأستاذ', text: text, type: 'teacher', time: new Date().toLocaleTimeString() });
-            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
+            if (messages.length === 0) return;
+            let lastMsg = messages[messages.length - 1];
 
+            messages.push({
+                studentEmail: lastMsg.studentEmail,
+                studentName: lastMsg.studentName,
+                teacherEmail: window.currentUser.email,
+                sender: 'teacher',
+                text: text,
+                time: new Date().toLocaleTimeString()
+            });
+            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
             input.value = '';
-            loadTeacherChat();
+            loadTeacherMessages();
         }
 
         function updateVisitorCounter() {
-            let count = localStorage.getItem('visitorCount') || '14';
-            document.getElementById('visitorCount').innerText = count;
+            let users = JSON.parse(localStorage.getItem('hedayah_users') || '[]');
+            document.getElementById('visitorCount').innerText = users.length;
+        }
+
+        function logout() {
+            location.reload();
         }
 
         window.onload = function() {
