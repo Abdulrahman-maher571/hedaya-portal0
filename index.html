@@ -3,1126 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الهداية الخليفية - مدرسة الهداية الخليفية الثانوية للبنين</title>
+    <title>بوابة مدرسة الهداية الخليفية الثانوية للبنين</title>
     <style>
-        :root {
-            --card-bg: rgba(15, 23, 42, 0.92);
-            --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-primary: #38bdf8;
-            --accent-secondary: #818cf8;
-            --accent-gold: #fbbf24;
-            --border-color: rgba(255, 255, 255, 0.12);
-            --glow-color: rgba(56, 189, 248, 0.25);
-            
-            --box-gradient-1: linear-gradient(135deg, rgba(3, 105, 161, 0.85), rgba(2, 132, 199, 0.95));
-            --box-gradient-2: linear-gradient(135deg, rgba(67, 56, 202, 0.85), rgba(99, 102, 241, 0.95));
-            --box-gradient-3: linear-gradient(135deg, rgba(5, 150, 105, 0.85), rgba(16, 185, 129, 0.95));
-            --box-gradient-4: linear-gradient(135deg, rgba(180, 83, 9, 0.85), rgba(217, 119, 6, 0.95));
-            --dashboard-widget-bg: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-        }
-
-        [data-theme="light"] {
-            --card-bg: rgba(255, 255, 255, 0.94);
-            --text-color: #0f172a;
-            --text-secondary: #475569;
-            --accent-primary: #0284c7;
-            --accent-secondary: #4f46e5;
-            --accent-gold: #d97706;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --glow-color: rgba(2, 132, 199, 0.15);
-            
-            --box-gradient-1: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            --box-gradient-2: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-            --box-gradient-3: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            --box-gradient-4: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            --dashboard-widget-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.95));
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background 0.4s ease, color 0.4s ease, transform 0.3s ease;
-        }
-
-        body {
-            background-color: #020617;
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .animated-bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(125deg, #020617 0%, #0f172a 40%, #1e1b4b 70%, #090d16 100%);
-            background-size: 300% 300%;
-            animation: meshMove 20s ease infinite;
-        }
-
-        @keyframes meshMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .bg-grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at 50% 50%, black 60%, transparent 100%);
-        }
-
-        header {
-            background-color: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .menu-toggle-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .menu-toggle-btn span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background-color: var(--accent-primary);
-            border-radius: 2px;
-        }
-
-        .menu-toggle-btn:hover {
-            border-color: var(--accent-primary);
-            background: var(--glow-color);
-        }
-
-        .logo-title h1 {
-            font-size: 19px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-title span {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .nav-dropdown-menu {
-            position: absolute;
-            top: 75px;
-            right: 30px;
-            background: var(--card-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 320px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-            z-index: 1100;
-        }
-
-        .nav-dropdown-menu.show {
-            display: flex;
-            animation: fadeInMenu 0.3s ease forwards;
-        }
-
-        @keyframes fadeInMenu {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .nav-dropdown-menu button {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            text-align: right;
-            padding: 10px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .nav-dropdown-menu button:hover {
-            background: var(--glow-color);
-            color: var(--accent-primary);
-        }
-
-        .menu-category-title {
-            font-size: 11px;
-            color: var(--accent-primary);
-            font-weight: 800;
-            padding: 8px 12px 4px 12px;
-            margin-top: 5px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .theme-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 12px;
-        }
-
-        .theme-btn:hover {
-            border-color: var(--accent-primary);
-            background: var(--glow-color);
-        }
-
-        .main-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 30px auto;
-            padding: 0 20px;
-            flex-grow: 1;
-        }
-
-        .page-view {
-            display: none;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        .page-view.active-page {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card-box {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 35px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-gold));
-        }
-
-        h2 {
-            font-size: 24px;
-            color: var(--text-color);
-            margin-bottom: 18px;
-            font-weight: 800;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        p {
-            line-height: 2.1;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-            font-size: 15px;
-            text-align: justify;
-        }
-
-        .colored-box-1 {
-            background: var(--box-gradient-1);
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(3, 105, 161, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .colored-box-2 {
-            background: var(--box-gradient-2);
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(67, 56, 202, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .colored-box-3 {
-            background: var(--box-gradient-3);
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .colored-box-4 {
-            background: var(--box-gradient-4);
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(180, 83, 9, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        [data-theme="light"] .colored-box-1,
-        [data-theme="light"] .colored-box-2,
-        [data-theme="light"] .colored-box-3,
-        [data-theme="light"] .colored-box-4 {
-            color: #0f172a;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .info-card-widget {
-            background: var(--dashboard-widget-bg);
-            color: var(--text-color);
-            padding: 24px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card-widget::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-        }
-
-        .info-card-widget h4 {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-secondary);
-        }
-
-        .info-card-widget .widget-value {
-            font-size: 22px;
-            font-weight: 800;
-            font-family: monospace;
-            color: var(--accent-primary);
-        }
-
-        .navigation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .nav-link-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid var(--border-color);
-            padding: 25px 20px;
-            border-radius: 16px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .nav-link-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            background: var(--glow-color);
-        }
-
-        .nav-link-card span:first-child {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-color);
-        }
-
-        .nav-link-card span:last-child {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .subject-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .subject-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            text-align: center;
-        }
-
-        .subject-card h4 {
-            font-size: 17px;
-            color: var(--accent-primary);
-            font-weight: 800;
-        }
-
-        .subject-card a {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            border: 1px solid var(--border-color);
-        }
-
-        .subject-card a:hover {
-            background: var(--accent-primary);
-            color: #020617;
-        }
-
-        .sheet-iframe-container {
-            width: 100%;
-            height: 480px;
-            overflow: hidden;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .sheet-iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .pomodoro-box {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-
-        .pomodoro-task-input {
-            width: 100%;
-            max-width: 400px;
-            padding: 10px;
-            margin-bottom: 15px;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .timer-status-badge {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 10px;
-        }
-
-        .timer-display {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--accent-gold);
-            margin: 15px 0;
-            font-family: monospace;
-        }
-
-        .timer-controls-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .timer-btn {
-            padding: 8px 18px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background: rgba(255,255,255,0.05);
-            color: var(--text-color);
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .timer-btn:hover {
-            background: var(--accent-primary);
-            color: #020617;
-        }
-
-        .time-adjust-btn {
-            padding: 6px 12px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 12px;
-        }
-
-        .time-adjust-btn:hover {
-            background: var(--accent-primary);
-            color: #020617;
-        }
-
-        .completed-tasks-container {
-            margin-top: 20px;
-            text-align: right;
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-        }
-
-        .completed-tasks-container h3 {
-            font-size: 15px;
-            color: var(--accent-primary);
-            margin-bottom: 10px;
-        }
-
-        .tasks-list {
-            list-style: none;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .task-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 13px;
-            border: 1px solid var(--border-color);
-        }
-
-        .delete-task-btn {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border: none;
-            padding: 2px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .delete-task-btn:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        .download-action-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #10b981, #047857);
-            color: white;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 13px;
-            margin-top: 15px;
-        }
-
-        .school-contact-card {
-            background: rgba(56, 189, 248, 0.04);
-            border: 1px dashed var(--accent-primary);
-            padding: 20px;
-            border-radius: 16px;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .school-contact-card h4 {
-            color: var(--accent-primary);
-            font-size: 16px;
-            font-weight: 800;
-        }
-
-        .school-contact-card p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .feedback-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .feedback-input, .feedback-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: var(--text-color);
-            font-size: 14px;
-        }
-
-        .feedback-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-secondary);
-            font-size: 13px;
-            border-top: 1px solid var(--border-color);
-            background: var(--card-bg);
-            margin-top: 40px;
-        }
+        :root { --primary: #0f172a; --secondary: #2563eb; --accent: #22c55e; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        header { background: var(--primary); color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .logo { font-size: 1.25rem; font-weight: bold; }
+        .counter-badge { background: var(--secondary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.9rem; font-weight: bold; }
+        .main-container { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); width: 90%; }
+        .hidden { display: none !important; }
+        .btn { background: var(--secondary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: bold; width: 100%; transition: background 0.2s; margin-top: 1rem; }
+        .btn:hover { background: #1d4ed8; }
+        .input-group { margin-bottom: 1rem; text-align: right; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--primary); }
+        .input-group input, .input-group select { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; }
+        .chat-box { border: 1px solid #e2e8f0; border-radius: 8px; height: 320px; overflow-y: auto; padding: 1rem; background: #f1f5f9; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .message { padding: 0.75rem 1rem; border-radius: 8px; max-width: 80%; word-break: break-word; line-height: 1.4; }
+        .message.student-msg { background: #dbeafe; align-self: flex-start; border-right: 4px solid var(--secondary); }
+        .message.teacher-msg { background: #dcfce7; align-self: flex-end; border-right: 4px solid var(--accent); }
+        .chat-input-area { display: flex; gap: 0.5rem; }
+        .chat-input-area input { flex: 1; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+        footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 1rem; font-size: 0.9rem; }
+        .role-selector { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .role-btn { flex: 1; padding: 1rem; border: 2px solid #cbd5e1; background: #fff; border-radius: 8px; cursor: pointer; font-weight: bold; text-align: center; transition: all 0.2s; }
+        .role-btn.active { border-color: var(--secondary); color: var(--secondary); background: #eff6ff; }
+        .section-title { font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .student-item { background: #f8fafc; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
-<body data-theme="dark">
-
-    <div class="animated-bg-mesh"></div>
-    <div class="bg-grid-overlay"></div>
+<body>
 
     <header>
-        <div class="brand-section">
-            <button class="menu-toggle-btn" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="logo-title">
-                <h1>مدرسة الهداية الخليفية</h1>
-                <span>الهداية الخليفية</span>
-            </div>
-        </div>
-
-        <div id="navMenu" class="nav-dropdown-menu">
-            <button onclick="switchPage('page-home'); toggleMenu();">الصفحة الرئيسية</button>
-            <button onclick="switchPage('page-about'); toggleMenu();">عن مدرسة الهداية الخليفية</button>
-            
-            <div class="menu-category-title">تنبيهات وإشعارات المدرسة</div>
-            <button onclick="switchPage('page-all-school-notices'); toggleMenu();">تنبيهات المدرسة عامة</button>
-
-            <div class="menu-category-title">الصف الأول الثانوي</div>
-            <button onclick="switchPage('page-grade1-notices'); toggleMenu();">إشعارات وتنبيهات الأول الثانوي</button>
-            <button onclick="switchPage('page-grade1'); toggleMenu();">قوائم الشروحات والدروس</button>
-
-            <div class="menu-category-title">الصف الثاني الثانوي</div>
-            <button onclick="switchPage('page-grade2-notices'); toggleMenu();">إشعارات وتنبيهات الثاني الثانوي</button>
-            <button onclick="switchPage('page-grade2'); toggleMenu();">قوائم الشروحات والدروس</button>
-
-            <div class="menu-category-title">الصف الثالث الثانوي</div>
-            <button onclick="switchPage('page-grade3-notices'); toggleMenu();">إشعارات وتنبيهات الثالث الثانوي (التوجيهي)</button>
-            <button onclick="switchPage('page-grade3'); toggleMenu();">قوائم الشروحات والدروس</button>
-
-            <div class="menu-category-title">الخدمات السريعة</div>
-            <button onclick="switchPage('page-curricula'); toggleMenu();">مناهج البحرين</button>
-
-            <div class="menu-category-title">الأقسام الجديدة المبتكرة</div>
-            <button onclick="switchPage('page-tips'); toggleMenu();">نصائح ذكية للتفوق الدراسي</button>
-            <button onclick="switchPage('page-feedback'); toggleMenu();">صندوق الاقتراحات والآراء</button>
-        </div>
-
-        <div class="header-actions">
-            <button class="theme-btn" onclick="toggleAppTheme()">تغيير المظهر</button>
-        </div>
+        <div class="logo">مدرسة الهداية الخليفية الثانوية للبنين</div>
+        <div class="counter-badge">الزوار المسجلين: <span id="visitorCount">1</span></div>
     </header>
 
-    <div class="main-wrapper">
-
-        <!-- ================= الصفحة الرئيسية ================= -->
-        <div id="page-home" class="page-view active-page">
+    <div class="main-container">
+        <!-- شاشة تسجيل الدخول -->
+        <div id="loginScreen">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary); text-align: center;">تسجيل الدخول لبوابة الهداية</h2>
+            <div class="role-selector">
+                <div class="role-btn active" id="studentRoleBtn" onclick="setRole('student')">طالب</div>
+                <div class="role-btn" id="teacherRoleBtn" onclick="setRole('teacher')">معلم</div>
+            </div>
             
-            <div class="colored-box-1">
-                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; opacity: 0.9;">رسالة تحفيزية لليوم</h3>
-                <p id="motivationalQuoteText" style="font-size: 19px; font-weight: 800; color: inherit; margin: 0; text-align: center;">جاري تحميل حكمة اليوم...</p>
+            <div class="input-group">
+                <label id="labelEmail">البريد الإلكتروني الوزاري أو الحساب</label>
+                <input type="email" id="userEmailInput" placeholder="أدخل بريدك الإلكتروني">
             </div>
-
-            <div class="dashboard-grid">
-                <div class="info-card-widget">
-                    <h4>الساعة والتاريخ الحالي</h4>
-                    <div id="liveClockWidget" class="widget-value" style="font-size: 18px; margin-top: 5px;">00:00:00</div>
-                    <div id="liveDateWidget" style="font-size: 12px; margin-top: 5px; opacity: 0.9;">--/--/----</div>
-                </div>
-                <div class="info-card-widget">
-                    <h4>العد التنازلي لطابور المدرسة (7:05 ص)</h4>
-                    <div id="schoolCountdownWidget" class="widget-value">-- س -- د</div>
-                </div>
+            <div class="input-group">
+                <label>اسم المستخدم / اللقب</label>
+                <input type="text" id="userNameInput" placeholder="أدخل اسمك الكريم">
             </div>
-
-            <div class="card-box">
-                <h2>مرحباً بك في الهداية الخليفية - صرح التميز والإبداع</h2>
-                <p>تُعد هذه المنصة الرقمية الشاملة ثمرة تفكير تقني عميق، صُممت بعناية فائقة لتكون المرجع الأول والأساسي لطلاب مدرسة الهداية الخليفية العريقة في مملكة البحرين. نحن نؤمن تماماً بأن التكنولوجيا والبرمجة قادرتان على إحداث ثورة حقيقية في طريقة تلقي المعلومة وتنظيم أوقات الدراسة.</p>
-                
-                <div class="navigation-grid">
-                    <div class="nav-link-card" onclick="switchPage('page-about')">
-                        <span>تاريخ الهداية الخليفية</span>
-                        <span>اكتشف الإرث العريق للمدرسة</span>
-                    </div>
-                    <div class="nav-link-card" onclick="switchPage('page-curricula')">
-                        <span>مناهج البحرين</span>
-                        <span>الكتب والمناهج الدراسية الرسمية</span>
-                    </div>
-                    <div class="nav-link-card" onclick="switchPage('page-feedback')">
-                        <span>صندوق الاقتراحات</span>
-                        <span>شاركنا برأيك لتطوير المنصة باستمرار</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="colored-box-2" style="border-right: 5px solid var(--accent-gold);">
-                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">رسالة موجهة إلى إدارة المدرسة والهيئة التعليمية</h3>
-                <p style="color: inherit; margin-bottom: 10px;">حضرة مدير مدرسة الهداية الخليفية المحترم، وأفاضل المعلمين والأعزاء الأجلاء،</p>
-                <p style="color: inherit; margin: 0;">نضع بين أيديكم الكريمة هذا الإنجاز البرمجي والتقني المتواضع، لتكون أداة مساعدة فعالة لزملائنا الطلاب في تنظيم أوقاتهم ومراجعة دروسهم بكل يسر وسهولة.</p>
-            </div>
-
-            <div class="card-box">
-                <h2>مؤقت التركيز الدراسي (بومودورو) وتتبع المهام</h2>
-                <p>اخترنا لك تقنية **البومودورو (Pomodoro Technique)** العالمية لزيادة التركيز ومحاربة التسويف أثناء المذاكرة الطويلة.</p>
-
-                <div class="pomodoro-box">
-                    <div id="timerStatusBadge" class="timer-status-badge">وضع التركيز (جلسة عمل)</div>
-                    <input type="text" id="pomodoroTaskInput" class="pomodoro-task-input" placeholder="اكتب المهمة الحالية (مثال: حل واجب الرياضيات)...">
-                    
-                    <div class="timer-controls-row">
-                        <button class="time-adjust-btn" onclick="adjustTime(5)">+ 5 دقائق</button>
-                        <button class="time-adjust-btn" onclick="adjustTime(-5)">- 5 دقائق</button>
-                    </div>
-
-                    <div id="timerDisplay" class="timer-display">25:00</div>
-                    
-                    <div class="timer-controls-row">
-                        <button class="timer-btn" onclick="startTimer()">بدء الوقت</button>
-                        <button class="timer-btn" onclick="pauseTimer()">إيقاف مؤقت</button>
-                        <button class="timer-btn" onclick="resetTimer()">إعادة ضبط</button>
-                    </div>
-
-                    <div class="completed-tasks-container">
-                        <h3>سجل المهام المنجزة المحفوظة</h3>
-                        <ul id="completedTasksList" class="tasks-list"></ul>
-                    </div>
-                </div>
-            </div>
+            <button class="btn" onclick="handleLogin()">دخول للمنصة</button>
         </div>
 
-        <!-- ================= تنبيهات المدرسة عامة ================= -->
-        <div id="page-all-school-notices" class="page-view">
-            <div class="card-box">
-                <h2>تنبيهات وإشعارات المدرسة العامة</h2>
-                <p>عرض مباشر لردود وإشعارات المدرسة العامة:</p>
-                <div class="sheet-iframe-container">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQE2qzXeDuqDymSe0_VQFALNRGMx-zMfJ5pYR51KYML5LeV0eIvsSkZWSfhWynAqAR_cPmtE4p8Gejv/pubhtml?gid=355268307&single=true&widget=true&headers=false"></iframe>
-                </div>
+        <!-- لوحة تحكم الطالب -->
+        <div id="studentDashboard" class="hidden">
+            <h2 class="section-title">منصة الطالب - مراسلة المعلم الخاصة</h2>
+            <p style="margin-bottom: 1rem; color: #64748b;">تواصل مع الأستاذ (teacher12@gmail.com) بسرية تامة واستفسر عن دروسك:</p>
+            <div class="chat-box" id="studentChatBox">
+                <div class="message teacher-msg"><b>الأستاذ:</b> أهلاً بك يا بطل في بوابة مدرسة الهداية الخليفية. اكتب سؤالك هنا وسأقوم بالرد عليك.</div>
             </div>
+            <div class="chat-input-area">
+                <input type="text" id="studentMessageInput" placeholder="اكتب رسالتك للأستاذ...">
+                <button class="btn" style="width: auto; margin-top: 0;" onclick="sendStudentMessage()">إرسال</button>
+            </div>
+            <button class="btn" style="background: #ef4444; margin-top: 2rem;" onclick="logout()">تسجيل خروج</button>
         </div>
 
-        <!-- ================= إشعارات الأول الثانوي ================= -->
-        <div id="page-grade1-notices" class="page-view">
-            <div class="card-box">
-                <h2>إشعارات الصف الأول الثانوي</h2>
-                <div class="sheet-iframe-container">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQE2qzXeDuqDymSe0_VQFALNRGMx-zMfJ5pYR51KYML5LeV0eIvsSkZWSfhWynAqAR_cPmtE4p8Gejv/pubhtml?gid=0&single=true&widget=true&headers=false"></iframe>
+        <!-- لوحة تحكم المعلم -->
+        <div id="teacherDashboard" class="hidden">
+            <h2 class="section-title">لوحة تحكم المعلم (الحساب الرسمي)</h2>
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">الطلاب المسجلين في التطبيق:</h3>
+                    <div id="registeredStudentsList" style="max-height: 320px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.5rem; background: #f8fafc;">
+                        <!-- يتم تعبئتها تلقائياً -->
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- ================= شروحات الأول الثانوي ================= -->
-        <div id="page-grade1" class="page-view">
-            <div class="card-box">
-                <h2>قوائم شروحات ودروس الصف الأول الثانوي</h2>
-                <p style="color: var(--accent-primary); font-weight: bold; margin-bottom: 15px;">هذه دروس الفصل الأول.. انقر في آخر القائمة على القناة لتجد باقي الدروس ودروس الفصل الثاني</p>
-                <div class="subject-links-grid">
-                    <div class="subject-card">
-                        <h4>ريض 151</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس مادة الرياضيات</p>
-                        <a href="https://youtube.com/playlist?list=PLlG_YNvzmOdUusdHWXO6coD4zwDbwE6T0&si=wlaNnI2hnDQqmSzq" target="_blank">مشاهدة الدروس</a>
+                <div>
+                    <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--primary);">مراسلة الطلاب (سرية خاصة):</h3>
+                    <div class="chat-box" id="teacherChatBox" style="height: 260px;">
+                        <div class="message student-msg"><b>النظام:</b> اختر طالباً من القائمة وابدأ الرد على استفساراته.</div>
                     </div>
-                    <div class="subject-card">
-                        <h4>كيم 102</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس مادة الكيمياء</p>
-                        <a href="https://youtube.com/playlist?list=PLlG_YNvzmOdVLjh707l8IO5-k3__g0C9l&si=iO5MY1JA6on09_km" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card">
-                        <h4>فيز 102</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس مادة الفيزياء</p>
-                        <a href="https://youtube.com/playlist?list=PLlG_YNvzmOdUpczXUrezK2PqwesxnIxhM&si=jo5kXZRSNVYZO40Z" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card" style="grid-column: 1 / -1; background: rgba(56, 189, 248, 0.08); border-color: var(--accent-primary);">
-                        <h4>قناة اليوتيوب التعليمية الرسمية</h4>
-                        <p style="font-size:13px;">يرجى الذهاب للقناة لمشاهدة باقي المواد ودروس الفصل الثاني</p>
-                        <a href="https://www.youtube.com/channel/UCoeTHTgTMKJRYpH8-w2xPsw" target="_blank" style="background: var(--accent-primary); color: #020617;">الانتقال إلى القناة الرسمية</a>
+                    <div class="chat-input-area">
+                        <input type="text" id="teacherMessageInput" placeholder="اكتب ردك للطالب...">
+                        <button class="btn" style="width: auto; margin-top: 0;" onclick="sendTeacherMessage()">إرسال</button>
                     </div>
                 </div>
             </div>
+            <button class="btn" style="background: #ef4444; margin-top: 2rem;" onclick="logout()">تسجيل خروج</button>
         </div>
-
-        <!-- ================= إشعارات الثاني الثانوي ================= -->
-        <div id="page-grade2-notices" class="page-view">
-            <div class="card-box">
-                <h2>إشعارات الصف الثاني الثانوي</h2>
-                <div class="sheet-iframe-container">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQE2qzXeDuqDymSe0_VQFALNRGMx-zMfJ5pYR51KYML5LeV0eIvsSkZWSfhWynAqAR_cPmtE4p8Gejv/pubhtml?gid=0&single=true&widget=true&headers=false"></iframe>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= شروحات الثاني الثانوي ================= -->
-        <div id="page-grade2" class="page-view">
-            <div class="card-box">
-                <h2>قوائم شروحات ودروس الصف الثاني الثانوي</h2>
-                <p style="color: var(--accent-primary); font-weight: bold; margin-bottom: 15px;">هذه دروس الفصل الأول.. انقر في آخر القائمة على القناة لتجد باقي الدروس ودروس الفصل الثاني</p>
-                <div class="subject-links-grid">
-                    <div class="subject-card">
-                        <h4>كيم 211</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس مادة الكيمياء</p>
-                        <a href="https://youtube.com/playlist?list=PLX8PAyx4tghVsLkZ1sqv4-hoURGBeKBu-&si=bg9_kKCXND9vK9Ft" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card">
-                        <h4>ريض 253</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس مادة الرياضيات</p>
-                        <a href="https://youtube.com/playlist?list=PLX8PAyx4tghVoKlXDwCOOc2Fs_nIQsCyD&si=idqg9KgOGfc0yp2-" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card" style="grid-column: 1 / -1; background: rgba(56, 189, 248, 0.08); border-color: var(--accent-primary);">
-                        <h4>قناة اليوتيوب التعليمية الرسمية</h4>
-                        <p style="font-size:13px;">يرجى الذهاب للقناة لمشاهدة باقي المواد ودروس الفصل الثاني</p>
-                        <a href="https://www.youtube.com/channel/UC3Uq-DT2YyJGxSpgySOKp3g" target="_blank" style="background: var(--accent-primary); color: #020617;">الانتقال إلى القناة الرسمية</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= إشعارات الثالث الثانوي ================= -->
-        <div id="page-grade3-notices" class="page-view">
-            <div class="card-box">
-                <h2>إشعارات الصف الثالث الثانوي (التوجيهي)</h2>
-                <div class="sheet-iframe-container">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQE2qzXeDuqDymSe0_VQFALNRGMx-zMfJ5pYR51KYML5LeV0eIvsSkZWSfhWynAqAR_cPmtE4p8Gejv/pubhtml?gid=0&single=true&widget=true&headers=false"></iframe>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= شروحات الثالث الثانوي ================= -->
-        <div id="page-grade3" class="page-view">
-            <div class="card-box">
-                <h2>قوائم شروحات ودروس الصف الثالث الثانوي (التوجيهي)</h2>
-                <p style="color: var(--accent-primary); font-weight: bold; margin-bottom: 15px;">هذه دروس الفصل الأول.. انقر في آخر القائمة على القناة لتجد باقي الدروس ودروس الفصل الثاني</p>
-                <div class="subject-links-grid">
-                    <div class="subject-card">
-                        <h4>كيم 315 - كيم 317</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس الكيمياء المتقدمة</p>
-                        <a href="https://youtube.com/playlist?list=PLWSSI0qJb-owQCxxawUGh0kGXSJap-l9L&si=1ufBJQe83JwGXfNZ" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card">
-                        <h4>فيز 311 - فيز 312</h4>
-                        <p style="font-size:12px;">قائمة تشغيل دروس الفيزياء المتقدمة</p>
-                        <a href="https://youtube.com/playlist?list=PLWSSI0qJb-ozNlh9EKzocFfBTClDdvXMb&si=P6Dknfrf_6GfDbY8" target="_blank">مشاهدة الدروس</a>
-                    </div>
-                    <div class="subject-card" style="grid-column: 1 / -1; background: rgba(56, 189, 248, 0.08); border-color: var(--accent-primary);">
-                        <h4>قناة اليوتيوب التعليمية الرسمية</h4>
-                        <p style="font-size:13px;">يرجى الذهاب للقناة لمشاهدة باقي المواد ودروس الفصل الثاني</p>
-                        <a href="https://www.youtube.com/channel/UCM_B8MPfINsblnpbm21Zk_w" target="_blank" style="background: var(--accent-primary); color: #020617;">الانتقال إلى القناة الرسمية</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= صفحة عن المدرسة ================= -->
-        <div id="page-about" class="page-view">
-            <div class="card-box">
-                <h2>عن مدرسة الهداية الخليفية التاريخية</h2>
-                <p>تعتبر مدرسة الهداية الخليفية الثانوية للبنين بمنطقة المحرق في مملكة البحرين، منارة العلم الأولى وأول صرح للتعليم النظامي الحكومي في تاريخ البحرين ومنطقة الخليج العربي بأسرها. تأسست المدرسة رسمياً في عام 1919م.</p>
-                <div class="school-contact-card">
-                    <h4>بيانات الاتصال والبريد الإلكتروني الرسمي للمدرسة</h4>
-                    <p><strong>البريد الإلكتروني الرسمي:</strong> hedayahseb@moe.gov.bh</p>
-                    <p><strong>رقم الهاتف المعتمد:</strong> 17322336</p>
-                    <p><strong>العنوان الجغرافي:</strong> مملكة البحرين - المحرق</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= صفحة مناهج البحرين ================= -->
-        <div id="page-curricula" class="page-view">
-            <div class="card-box">
-                <h2>مناهج البحرين والكتب الدراسية</h2>
-                <p>يُعتبر موقع المناهج البحرينية المرجع الشامل والأبرز للحصول على الكتب المدرسية، أوراق العمل، والملخصات لجميع المراحل الدراسية في مملكة البحرين.</p>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://almanahj.com/bh/#google_vignette" target="_blank" class="download-action-btn" style="padding: 12px 24px; font-size: 15px;">الانتقال إلى موقع المناهج البحرينية</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= قسم النصائح الدراسية ================= -->
-        <div id="page-tips" class="page-view">
-            <div class="card-box">
-                <h2>قسم النصائح الذكية للتفوق الدراسي</h2>
-                <p>إرشادات علمية وتقنيات مجربة لتحسين الكفاءة الذهنية وزيادة الإنتاجية أثناء المذاكرة.</p>
-            </div>
-        </div>
-
-        <!-- ================= صندوق الاقتراحات والآراء ================= -->
-        <div id="page-feedback" class="page-view">
-            <div class="card-box">
-                <h2>صندوق الاقتراحات والآراء لتطوير المنصة</h2>
-                <p>رأيك يهمنا جداً! هل لديك فكرة جديدة أو ملاحظة لتحسين أداء هذا الموقع؟ اكتبها لنا وسنأخذها بعين الاعتبار.</p>
-                <form action="https://formspree.io/f/mjykzjby" method="POST" class="feedback-form">
-                    <input type="text" name="email" class="feedback-input" placeholder="اكتب بريدك الإلكتروني أو اسمك (اختياري)...">
-                    <textarea name="message" class="feedback-textarea" placeholder="اكتب اقتراحك أو ملاحظتك هنا بكل تفصيل..." required></textarea>
-                    <button type="submit" class="download-action-btn" style="cursor: pointer; border: none;">إرسال الاقتراح</button>
-                </form>
-            </div>
-        </div>
-
     </div>
 
     <footer>
-        <p>مدرسة الهداية الخليفية الثانوية للبنين - مملكة البحرين</p>
+        جميع الحقوق محفوظة &copy; 2026 - بوابة مدرسة الهداية الخليفية الثانوية للبنين
     </footer>
 
     <script>
-        const motivationalQuotes = [
-            "النجاح ليس صدفة، بل هو ثمرة الاجتهاد والعمل الجاد اليومي.",
-            "العلم كنز والالتزام مفتاحه؛ استمر في السعي نحو القمة.",
-            "كل ساعة تقضيها في المذاكرة تقربك خطوة نحو تحقيق أهدافك المستقبلية.",
-            "اصنع لنفسك مجداً يستحق أن يُروى، فالصبر والاجتهاد يصنعان المعجزات."
-        ];
+        let currentRole = 'student';
+        let currentUser = null;
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const randomIndex = Math.floor(Math.random() * motivationalQuotes.length);
-            document.getElementById('motivationalQuoteText').innerText = motivationalQuotes[randomIndex];
-            updateLiveClockAndTimers();
-            setInterval(updateLiveClockAndTimers, 1000);
-        });
+        function setRole(role) {
+            currentRole = role;
+            const studentBtn = document.getElementById('studentRoleBtn');
+            const teacherBtn = document.getElementById('teacherRoleBtn');
+            const emailInput = document.getElementById('userEmailInput');
 
-        function switchPage(pageId) {
-            const pages = document.querySelectorAll('.page-view');
-            pages.forEach(p => p.classList.remove('active-page'));
-            const targetPage = document.getElementById(pageId);
-            if(targetPage) {
-                targetPage.classList.add('active-page');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (role === 'student') {
+                studentBtn.classList.add('active');
+                teacherBtn.classList.remove('active');
+                emailInput.value = '';
+                emailInput.disabled = false;
+                emailInput.placeholder = 'أدخل بريدك الوزاري (student@moe.bh)';
+            } else {
+                teacherBtn.classList.add('active');
+                studentBtn.classList.remove('active');
+                emailInput.value = 'teacher12@gmail.com';
+                emailInput.disabled = true;
             }
         }
 
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('show');
-        }
+        function handleLogin() {
+            const name = document.getElementById('userNameInput').value.trim();
+            const email = document.getElementById('userEmailInput').value.trim();
 
-        function toggleAppTheme() {
-            const body = document.body;
-            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        }
-
-        let timerInterval;
-        let timeLeft = 25 * 60;
-        let isWorkSession = true;
-        const display = document.getElementById('timerDisplay');
-        const statusBadge = document.getElementById('timerStatusBadge');
-
-        function updateTimerDisplay() {
-            const m = Math.floor(timeLeft / 60);
-            const s = timeLeft % 60;
-            display.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-
-        function adjustTime(mins) {
-            let newTime = timeLeft + (mins * 60);
-            if (newTime > 0) {
-                timeLeft = newTime;
-                updateTimerDisplay();
-            }
-        }
-
-        function startTimer() {
-            const taskInput = document.getElementById('pomodoroTaskInput');
-            if(isWorkSession && !taskInput.value.trim()) {
-                alert("من فضلك اكتب المهمة التي تريد إنجازها في المؤقت أولاً!");
+            if (!name) {
+                alert('الرجاء إدخال اسمك الكريم');
                 return;
             }
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateTimerDisplay();
+
+            if (currentRole === 'teacher' && email !== 'teacher12@gmail.com') {
+                alert('حساب المعلم المعتمد هو: teacher12@gmail.com');
+                return;
+            }
+
+            currentUser = { name, email, role: currentRole };
+
+            // حفظ الطالب في قائمة المسجلين وزيادة العداد
+            let students = JSON.parse(localStorage.getItem('hedayah_students') || '[]');
+            if (currentRole === 'student' && !students.some(s => s.email === email)) {
+                students.push({ name, email });
+                localStorage.setItem('hedayah_students', JSON.stringify(students));
+                
+                let count = parseInt(localStorage.getItem('visitorCount') || '14') + 1;
+                localStorage.setItem('visitorCount', count);
+            }
+
+            document.getElementById('loginScreen').classList.add('hidden');
+
+            if (currentRole === 'student') {
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                loadStudentMessages();
+            } else {
+                document.getElementById('teacherDashboard').classList.remove('hidden');
+                loadTeacherData();
+            }
+            updateVisitorCounter();
+        }
+
+        function sendStudentMessage() {
+            const input = document.getElementById('studentMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
+            messages.push({ senderEmail: currentUser.email, senderName: currentUser.name, text: text, type: 'student', time: new Date().toLocaleTimeString() });
+            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
+
+            input.value = '';
+            loadStudentMessages();
+        }
+
+        function loadStudentMessages() {
+            const chatBox = document.getElementById('studentChatBox');
+            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
+            let html = `<div class="message teacher-msg"><b>الأستاذ:</b> أهلاً بك يا بطل. تفضل بطرح سؤالك وسأجيبك.</div>`;
+            
+            messages.filter(m => m.senderEmail === currentUser.email || (m.type === 'teacher' && m.targetEmail === currentUser.email)).forEach(m => {
+                if (m.type === 'student') {
+                    html += `<div class="message student-msg"><b>أنت (${m.senderName}):</b> ${m.text}</div>`;
                 } else {
-                    clearInterval(timerInterval);
-                    if (isWorkSession) {
-                        const taskName = taskInput.value.trim();
-                        saveCompletedTask(taskName);
-                        taskInput.value = "";
-                        alert(`أحسنت يا بطل! أنهيت جلسة التركيز لمهمة: "${taskName}".`);
-                        isWorkSession = false;
-                        timeLeft = 10 * 60;
-                        statusBadge.innerText = "وقت الاستراحة (10 دقائق)";
-                        statusBadge.style.color = "var(--accent-gold)";
-                        updateTimerDisplay();
-                        startTimer();
-                    } else {
-                        alert("انتهت الاستراحة! حان الوقت للعودة لجلسة تركيز جديدة.");
-                        isWorkSession = true;
-                        timeLeft = 25 * 60;
-                        statusBadge.innerText = "وضع التركيز (جلسة عمل)";
-                        statusBadge.style.color = "var(--accent-primary)";
-                        updateTimerDisplay();
-                    }
+                    html += `<div class="message teacher-msg"><b>الأستاذ:</b> ${m.text}</div>`;
                 }
-            }, 1000);
+            });
+            chatBox.innerHTML = html;
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function pauseTimer() { clearInterval(timerInterval); }
-        function resetTimer() { 
-            clearInterval(timerInterval); 
-            isWorkSession = true;
-            timeLeft = 25 * 60; 
-            statusBadge.innerText = "وضع التركيز (جلسة عمل)";
-            statusBadge.style.color = "var(--accent-primary)";
-            updateTimerDisplay(); 
-        }
-
-        function saveCompletedTask(taskName) {
-            let tasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
-            tasks.unshift({ name: taskName, date: new Date().toLocaleDateString('ar-BH', { hour: '2-digit', minute: '2-digit' }) });
-            localStorage.setItem('completedTasks', JSON.stringify(tasks));
-            loadCompletedTasks();
-        }
-
-        function loadCompletedTasks() {
-            let tasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
-            const listContainer = document.getElementById('completedTasksList');
-            if (!listContainer) return;
-            listContainer.innerHTML = '';
-            if (tasks.length === 0) {
-                listContainer.innerHTML = '<li style="text-align:center; color:var(--text-secondary); font-size:12px; padding:10px;">لا توجد مهام منجزة محفوظة حتى الآن.</li>';
+        function loadTeacherData() {
+            let students = JSON.parse(localStorage.getItem('hedayah_students') || '[]');
+            const listDiv = document.getElementById('registeredStudentsList');
+            if (students.length === 0) {
+                listDiv.innerHTML = '<p style="font-size:0.85rem; color:#64748b; text-align:center; padding:1rem;">لا توجد طلاب مسجلين حتى الآن.</p>';
                 return;
             }
-            tasks.forEach((task, index) => {
-                const li = document.createElement('li');
-                li.className = 'task-list-item';
-                li.innerHTML = `<span><strong>${task.name}</strong> <span style="font-size:10px; color:var(--text-secondary);">(${task.date})</span></span><button class="delete-task-btn" onclick="deleteTask(${index})">حذف</button>`;
-                listContainer.appendChild(li);
+            let html = '';
+            students.forEach((s, idx) => {
+                html += `<div class="student-item"><span><b>${s.name}</b><br><small style="color:#64748b">${s.email}</small></span><button class="btn" style="width:auto; padding:0.3rem 0.6rem; font-size:0.8rem; margin:0;" onclick="openChatWith('${s.email}', '${s.name}')">مراسلة</button></div>`;
             });
+            listDiv.innerHTML = html;
         }
 
-        function deleteTask(index) {
-            let tasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
-            tasks.splice(index, 1);
-            localStorage.setItem('completedTasks', JSON.stringify(tasks));
-            loadCompletedTasks();
+        let activeStudentEmail = null;
+        let activeStudentName = null;
+
+        function openChatWith(email, name) {
+            activeStudentEmail = email;
+            activeStudentName = name;
+            alert(`تم فتح محادثة خاصة مع الطالب: ${name}`);
+            loadTeacherChat();
         }
 
-        function updateLiveClockAndTimers() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ar-BH');
-            const dateString = now.toLocaleDateString('ar-BH', { year: 'numeric', month: 'long', day: 'numeric' });
-            const clockWidget = document.getElementById('liveClockWidget');
-            const dateWidget = document.getElementById('liveDateWidget');
-            if (clockWidget) clockWidget.innerText = timeString;
-            if (dateWidget) dateWidget.innerText = dateString;
-
-            const schoolTime = new Date();
-            schoolTime.setHours(7, 5, 0, 0);
-            if (now > schoolTime) {
-                schoolTime.setDate(schoolTime.getDate() + 1);
+        function loadTeacherChat() {
+            const chatBox = document.getElementById('teacherChatBox');
+            if (!activeStudentEmail) {
+                chatBox.innerHTML = '<div class="message student-msg"><b>النظام:</b> الرجاء اختيار طالب من القائمة الجانبية لعرض المحادثة والرد عليه.</div>';
+                return;
             }
-            const diffSchool = schoolTime - now;
-            const hoursLeft = Math.floor((diffSchool % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minsLeft = Math.floor((diffSchool % (1000 * 60 * 60)) / (1000 * 60));
-            const countdownWidget = document.getElementById('schoolCountdownWidget');
-            if (countdownWidget) countdownWidget.innerText = `${hoursLeft} س و ${minsLeft} د`;
+            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
+            let html = `<div class="message student-msg"><b>المحادثة مع الطالب:</b> ${activeStudentName}</div>`;
+            
+            messages.filter(m => m.senderEmail === activeStudentEmail || (m.type === 'teacher' && m.targetEmail === activeStudentEmail)).forEach(m => {
+                if (m.type === 'student') {
+                    html += `<div class="message student-msg"><b>${m.senderName}:</b> ${m.text}</div>`;
+                } else {
+                    html += `<div class="message teacher-msg"><b>أنت (الأستاذ):</b> ${m.text}</div>`;
+                }
+            });
+            chatBox.innerHTML = html;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendTeacherMessage() {
+            if (!activeStudentEmail) {
+                alert('الرجاء اختيار طالب من القائمة أولاً لتتمكن من إرسال الرد.');
+                return;
+            }
+            const input = document.getElementById('teacherMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            let messages = JSON.parse(localStorage.getItem('hedayah_messages') || '[]');
+            messages.push({ senderEmail: 'teacher12@gmail.com', targetEmail: activeStudentEmail, senderName: 'الأستاذ', text: text, type: 'teacher', time: new Date().toLocaleTimeString() });
+            localStorage.setItem('hedayah_messages', JSON.stringify(messages));
+
+            input.value = '';
+            loadTeacherChat();
+        }
+
+        function updateVisitorCounter() {
+            let count = localStorage.getItem('visitorCount') || '14';
+            document.getElementById('visitorCount').innerText = count;
+        }
+
+        window.onload = function() {
+            updateVisitorCounter();
         }
     </script>
 </body>
